@@ -1,0 +1,44 @@
+﻿@model List<ThriftShop.Models.ProductModel>
+@{
+    ViewData["Title"] = "User Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml"; // Use the default layout for users
+}
+
+<div class="user-dashboard-container">
+    <h2 class="user-dashboard-title">Welcome to Your Dashboard</h2>
+    <p class="user-dashboard-subtitle">Here are the latest products available:</p>
+
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <div class="alert alert-danger">@ViewBag.ErrorMessage</div>
+    }
+
+    <div class="row">
+        @foreach (var product in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <a asp-action="ProductDetails" asp-route-id="@product.ProductId" class="text-decoration-none">
+                        <div class="card-img-top">
+                            <!-- Display the first image -->
+                            @if (!string.IsNullOrEmpty(product.ImagePaths))
+                            {
+                                var firstImagePath = product.ImagePaths.Split(',')[0];
+                                <img src="@firstImagePath" class="card-img-top" alt="@product.ProductName" />
+                            }
+                            else
+                            {
+                                <img src="/images/no-image.png" class="card-img-top" alt="No Image Available" />
+                            }
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">@product.ProductName</h5>
+                            <p class="card-text"><strong>Price:</strong> $@product.Price</p>
+                            <p class="card-text"><strong>Stock:</strong> @product.StockStatus</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        }
+    </div>
+</div>

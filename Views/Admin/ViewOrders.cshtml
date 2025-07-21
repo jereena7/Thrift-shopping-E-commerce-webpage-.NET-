@@ -1,0 +1,87 @@
+﻿@model List<ThriftShop.Models.OrderModel>
+@{
+    ViewData["Title"] = "All Orders";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="orders-title text-center mt-4">📦 All Orders</h2>
+
+@if (Model == null || !Model.Any())
+{
+    <div class="alert alert-warning text-center mt-4">
+        ⚠️ No orders found.
+    </div>
+}
+else
+{
+    <table class="table orders-table mt-4">
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>User ID</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Total Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in Model)
+            {
+                <tr>
+                    <td>@order.OrderId</td>
+                    <td>@order.UserId</td>
+                    <td>@order.OrderDate.ToString("g")</td>
+                    <td>@order.Status</td>
+                    <td>@order.TotalAmount.ToString("C")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<style>
+    body {
+        background: linear-gradient(to right, #0d0d0d, #1a1a1a);
+        color: white;
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    .orders-title {
+        color: #ff4d4d;
+        font-weight: bold;
+        font-size: 32px;
+    }
+
+    .orders-table {
+        width: 90%;
+        margin: auto;
+        background: rgba(30, 30, 30, 0.95);
+        color: white;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+        .orders-table thead {
+            background: linear-gradient(to right, #990000, #b30000);
+            color: white;
+            text-transform: uppercase;
+        }
+
+        .orders-table th, .orders-table td {
+            text-align: center;
+            padding: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .orders-table tbody tr:hover {
+            background: rgba(255, 77, 77, 0.1);
+        }
+
+    .alert-warning {
+        background-color: rgba(255, 193, 7, 0.8);
+        color: black;
+        font-weight: bold;
+        border-radius: 8px;
+        padding: 15px;
+    }
+</style>

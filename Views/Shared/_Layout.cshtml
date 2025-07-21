@@ -1,0 +1,230 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ThriftShop</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <!-- Site-specific CSS -->
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/threft-home.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/login.css" />
+
+    <style>
+        /* Dark Theme Base */
+        body {
+            background-color: #121212;
+            color: #e0e0e0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Navbar - Red and Black */
+        .navbar {
+            background-color: #000000 !important;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(209, 0, 0, 0.3);
+            border-bottom: 2px solid #d10000 !important;
+        }
+
+        .navbar-brand {
+            color: #ffffff !important;
+            font-weight: bold;
+            font-size: 24px;
+            letter-spacing: 1px;
+        }
+
+        .navbar-nav .nav-link {
+            color: rgba(255, 255, 255, 0.8) !important;
+            margin: 0 10px;
+            font-size: 16px;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+            .navbar-nav .nav-link:hover {
+                color: #ffffff !important;
+            }
+
+            .navbar-nav .nav-link::after {
+                content: '';
+                position: absolute;
+                width: 0;
+                height: 2px;
+                bottom: 0;
+                left: 0;
+                background-color: #d10000;
+                transition: width 0.3s;
+            }
+
+            .navbar-nav .nav-link:hover::after {
+                width: 100%;
+            }
+
+        /* Red Accent Button */
+        .btn-outline-primary {
+            color: white;
+            border-color: #d10000;
+            background-color: transparent;
+            transition: all 0.3s;
+        }
+
+            .btn-outline-primary:hover {
+                background-color: #d10000;
+                color: white;
+                transform: translateY(-2px);
+                box-shadow: 0 4px 8px rgba(209, 0, 0, 0.3);
+            }
+
+        /* Footer */
+        footer {
+            background-color: #000000 !important;
+            border-top: 2px solid #d10000 !important;
+            color: #b0b0b0;
+        }
+
+            footer a {
+                color: #d10000 !important;
+                transition: color 0.3s;
+            }
+
+                footer a:hover {
+                    color: #ff0000 !important;
+                    text-decoration: none;
+                }
+
+        /* Main Content Container */
+        .container {
+            background-color: rgba(30, 30, 30, 0.8);
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Active Nav Link */
+        .nav-item.active .nav-link {
+            color: #ffffff !important;
+            font-weight: bold;
+        }
+
+            .nav-item.active .nav-link::after {
+                width: 100%;
+            }
+
+        /* Mobile Menu */
+        @@media (max-width: 991.98px) {
+            .navbar-collapse {
+                background-color: #000000;
+                padding: 15px;
+                border-radius: 8px;
+                margin-top: 10px;
+                border: 1px solid #d10000;
+            }
+
+            .navbar-nav .nav-link {
+                padding: 10px 0;
+                margin: 0;
+            }
+
+            .btn-outline-primary {
+                margin-top: 10px;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body class="d-flex flex-column min-vh-100">
+    <!-- Header Section -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <!-- Brand Logo -->
+                <a class="navbar-brand fw-bold" asp-area="" asp-controller="Home" asp-action="Index">
+                    <span style="color: #d10000">THRIFT</span>SHOP
+                </a>
+
+                <!-- Toggle Button for Mobile -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Navbar Links -->
+                <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                    <ul class="navbar-nav">
+                        @if (Context.Session.GetString("Username") == null)
+                        {
+                            <!-- If User is Not Logged In -->
+                            <li class="nav-item">
+                                <a class="nav-link fw-bold" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link btn btn-outline-primary rounded-pill px-3 ms-2" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <!-- If User is Logged In -->
+                            <li class="nav-item">
+                                <span class="nav-link">Welcome, <span style="color: #d10000">@Context.Session.GetString("Username")</span>!</span>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link fw-bold" asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Shopping" asp-action="ProductListing">Products</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Shopping" asp-action="ViewCart">View Cart</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Shopping" asp-action="ViewPurchases">My Orders</a>
+                            </li>
+                            @if (Context.Session.GetString("UserRole") == "Admin")
+                            {
+                                <!-- If User is Admin -->
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-controller="Admin" asp-action="Index">Dashboard</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-controller="Admin" asp-action="ManageProducts">Manage Products</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-controller="Admin" asp-action="ManageUsers">Manage Users</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-controller="Shopping" asp-action="AdminViewPurchases">All Orders</a>
+                                </li>
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <div class="flex-grow-1">
+        <main role="main" class="pb-3 container">
+            @RenderBody()
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="border-top footer text-muted py-4">
+        <div class="container text-center">
+            &copy; 2025 - <span style="color: #d10000">THRIFTSHOP</span> - <a asp-area="" asp-controller="Home" asp-action="Privacy" class="text-decoration-none">Privacy</a>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

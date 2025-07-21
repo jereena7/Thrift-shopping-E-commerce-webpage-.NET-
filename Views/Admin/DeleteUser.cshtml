@@ -1,0 +1,123 @@
+﻿@if (TempData["DeleteSuccess"] != null)
+{
+    <div class="alert alert-success text-center">
+        @TempData["DeleteSuccess"]
+    </div>
+}
+@model ThriftShop.Models.User
+@{
+    ViewData["Title"] = "Delete User";
+}
+
+<h2 class="buying-page-title">⚠️ Delete User</h2>
+
+<div class="buying-page-container">
+    <div class="alert alert-danger text-center">
+        Are you sure you want to delete this user?
+    </div>
+
+    <div class="buying-page-details">
+        <strong>Name:</strong> @Model.FirstName @Model.LastName<br />
+        <strong>Username:</strong> @Model.Username<br />
+        <strong>Role:</strong> @Model.UserRole
+    </div>
+
+    <form asp-action="DeleteUser" method="post">
+        <input type="hidden" asp-for="UserId" />
+        <button type="submit" class="btn btn-danger">✅ Yes, Delete</button>
+        <a asp-action="ManageUsers" class="btn btn-secondary">❌ Cancel</a>
+    </form>
+</div>
+
+<style>
+    body {
+        background: linear-gradient(to right, #0d0d0d, #1a1a1a);
+        background-attachment: fixed;
+        color: white;
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    .buying-page-container {
+        max-width: 600px;
+        margin: 60px auto;
+        padding: 25px;
+        background: rgba(30, 30, 30, 0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 15px;
+        box-shadow: 0 8px 16px rgba(255, 0, 0, 0.2);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+        .buying-page-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(255, 0, 0, 0.3);
+        }
+
+    .buying-page-title {
+        text-align: center;
+        font-size: 28px;
+        font-weight: bold;
+        color: #ff4d4d;
+        margin-bottom: 20px;
+    }
+
+    .buying-page-details {
+        margin-bottom: 20px;
+        font-size: 16px;
+        color: white;
+        line-height: 1.6;
+    }
+
+    .alert {
+        font-weight: bold;
+        padding: 15px;
+        border-radius: 6px;
+    }
+
+    .alert-danger {
+        background-color: rgba(204, 0, 0, 0.8);
+        color: white;
+        border: none;
+    }
+
+    .alert-success {
+        background-color: rgba(0, 128, 0, 0.8);
+        color: white;
+        border: none;
+    }
+
+    .btn-danger {
+        background: linear-gradient(135deg, #ff4d4d, #990000);
+        border: none;
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        text-transform: uppercase;
+        padding: 12px 20px;
+        border-radius: 6px;
+        transition: all 0.3s ease;
+        margin-right: 10px;
+    }
+
+        .btn-danger:hover {
+            background: linear-gradient(135deg, #cc0000, #ff1a1a);
+            transform: scale(1.05);
+        }
+
+    .btn-secondary {
+        background: linear-gradient(135deg, #6c757d, #5a6268);
+        border: none;
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        text-transform: uppercase;
+        padding: 12px 20px;
+        border-radius: 6px;
+        transition: all 0.3s ease;
+    }
+
+        .btn-secondary:hover {
+            background: linear-gradient(135deg, #5a6268, #6c757d);
+            transform: scale(1.05);
+        }
+</style>

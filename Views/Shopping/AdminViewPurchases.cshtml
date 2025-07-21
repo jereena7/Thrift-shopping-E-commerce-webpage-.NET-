@@ -1,0 +1,115 @@
+﻿@model List<ThriftShop.Models.Purchase>
+
+@{
+    ViewData["Title"] = "All Purchases (Admin)";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    body {
+        background: linear-gradient(to right, #0d0d0d, #1a1a1a);
+        color: white;
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    .admin-purchase-container {
+        max-width: 1000px;
+        margin: 60px auto;
+        padding: 25px;
+        background: rgba(30, 30, 30, 0.95);
+        border-radius: 15px;
+        box-shadow: 0 8px 16px rgba(255, 0, 0, 0.2);
+    }
+
+    .admin-purchase-title {
+        text-align: center;
+        font-size: 30px;
+        font-weight: bold;
+        color: #ff4d4d;
+        margin-bottom: 20px;
+    }
+
+    .styled-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 16px;
+        color: white;
+        border-radius: 12px;
+        overflow: hidden;
+    }
+
+        .styled-table thead {
+            background-color: #b30000;
+            color: white;
+        }
+
+        .styled-table th,
+        .styled-table td {
+            padding: 12px 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+
+        .styled-table tbody tr:nth-child(even) {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .styled-table tbody tr:hover {
+            background-color: rgba(255, 77, 77, 0.1);
+        }
+
+    .no-purchases-message {
+        text-align: center;
+        font-size: 18px;
+        font-weight: bold;
+        color: #ff4d4d;
+        margin-top: 30px;
+    }
+
+    @@media (max-width: 768px) {
+        .admin-purchase-container {
+            padding: 20px;
+        }
+
+        .styled-table {
+            font-size: 14px;
+        }
+    }
+</style>
+
+<div class="admin-purchase-container">
+    <h2 class="admin-purchase-title">🧾 All Purchases</h2>
+
+    @if (!Model.Any())
+    {
+        <p class="no-purchases-message">No purchases have been made yet.</p>
+    }
+    else
+    {
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Qty</th>
+                    <th>Total</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var purchase in Model)
+                {
+                    <tr>
+                        <td>@purchase.Username</td>
+                        <td>@purchase.ProductName</td>
+                        <td>@purchase.Price.ToString("C")</td>
+                        <td>@purchase.Quantity</td>
+                        <td>@purchase.TotalPrice.ToString("C")</td>
+                        <td>@purchase.PurchaseDate.ToString("MMMM dd, yyyy hh:mm tt")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>

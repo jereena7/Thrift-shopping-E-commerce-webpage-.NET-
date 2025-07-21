@@ -1,0 +1,217 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<style>
+    /* Red and Black Theme Styles */
+    body {
+        background-color: #000000;
+        color: #e0e0e0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    /* Hero Section */
+    .threft-hero {
+        background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1483985988355-763728e1935b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+        background-size: cover;
+        background-position: center;
+        padding: 5rem 2rem;
+        text-align: center;
+        border-bottom: 3px solid #d10000;
+    }
+
+    .threft-hero-title {
+        font-size: 3.5rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+        color: #ffffff;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    }
+
+    .threft-hero-subtitle {
+        font-size: 1.5rem;
+        margin-bottom: 2rem;
+        color: #e0e0e0;
+    }
+
+    .threft-hero-button {
+        display: inline-block;
+        padding: 0.8rem 2rem;
+        background-color: #d10000;
+        color: white;
+        text-decoration: none;
+        border-radius: 4px;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        border: 2px solid #ff0000;
+        box-shadow: 0 4px 8px rgba(209, 0, 0, 0.4);
+    }
+
+        .threft-hero-button:hover {
+            background-color: #ff0000;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(255, 0, 0, 0.5);
+        }
+
+    /* Sections */
+    .threft-section-title {
+        text-align: center;
+        font-size: 2.5rem;
+        margin: 3rem 0;
+        color: #ffffff;
+        position: relative;
+    }
+
+        .threft-section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: #d10000;
+            margin: 0.5rem auto;
+        }
+
+    /* Category Grid */
+    .threft-category-grid,
+    .threft-product-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        padding: 0 2rem;
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+
+    .threft-category-item,
+    .threft-product-item {
+        background-color: #1a1a1a;
+        border-radius: 8px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        border: 1px solid #333;
+    }
+
+        .threft-category-item:hover,
+        .threft-product-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(209, 0, 0, 0.3);
+            border-color: #d10000;
+        }
+
+    .threft-category-image,
+    .threft-product-image {
+        width: 100%;
+        height: 400px;
+        object-fit: cover;
+        border-bottom: 1px solid #333;
+    }
+
+    .threft-category-name,
+    .threft-product-name {
+        padding: 1rem;
+        font-size: 1.3rem;
+        color: #ffffff;
+        text-align: center;
+    }
+
+    .threft-product-price {
+        padding: 0 1rem 1rem;
+        font-size: 1.2rem;
+        color: #d10000;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    /* Responsive adjustments */
+    @@media (max-width: 768px) {
+        .threft-hero-title {
+            font-size: 2.5rem;
+        }
+
+        .threft-hero-subtitle {
+            font-size: 1.2rem;
+        }
+
+        .threft-category-grid,
+        .threft-product-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
+<!-- Hero Section -->
+<section class="threft-hero">
+    <div class="threft-hero-content">
+        <h1 class="threft-hero-title">Welcome to ThreftStore</h1>
+        <p class="threft-hero-subtitle">Discover the latest trends in fashion at unbeatable prices.</p>
+
+        <a class="threft-hero-button" asp-area="" asp-controller="Account" asp-action="Login">Shop Now</a>
+    </div>
+</section>
+
+<!-- Featured Categories -->
+<section class="threft-categories">
+    <h2 class="threft-section-title">Featured Categories</h2>
+    <div class="threft-category-grid">
+
+        <!-- Men's Fashion -->
+        <a asp-controller="Shopping" asp-action="MensFashion" class="threft-category-item text-decoration-none">
+            <img src="https://louisphilippe.abfrl.in/blog/wp-content/uploads/2024/07/LP-Jean-cropped.jpeg"
+                 alt="Men's Fashion"
+                 class="threft-category-image">
+            <h3 class="threft-category-name">Men's Fashion</h3>
+        </a>
+
+        <!-- Women's Fashion -->
+        <a asp-controller="Shopping" asp-action="WomensFashion" class="threft-category-item text-decoration-none">
+            <img src="https://millennialmagazine.com/wp-content/uploads/2021/07/womens-fashion-390x600.jpg"
+                 alt="Women's Fashion"
+                 class="threft-category-image">
+            <h3 class="threft-category-name">Women's Fashion</h3>
+        </a>
+
+        <!-- Kids' Fashion -->
+        <a asp-controller="Shopping" asp-action="KidsFashion" class="threft-category-item text-decoration-none">
+            <img src="https://fashion-wear.in/wp-content/uploads/2023/01/WhatsApp-Image-2022-12-29-at-10.52.01-2-jpeg.webp"
+                 alt="Kids' Fashion"
+                 class="threft-category-image">
+            <h3 class="threft-category-name">Kids' Fashion</h3>
+        </a>
+
+    </div>
+</section>
+
+<!-- Featured Products -->
+<section class="threft-featured-products">
+    <h2 class="threft-section-title">Featured Products</h2>
+    <div class="threft-product-grid">
+
+        <!-- Slim Fit Jeans -->
+        <a asp-controller="Shopping" asp-action="SlimFitJeans" class="threft-product-item text-decoration-none">
+            <img src="https://www.crossjeans.com/cdn/shop/files/E_161_300_cross_jeans_UD2024_1_1445x.jpg?v=1721726807"
+                 alt="Slim Fit Jeans"
+                 class="threft-product-image">
+            <h3 class="threft-product-name">Slim Fit Jeans</h3>
+            <p class="threft-product-price">₹499</p>
+        </a>
+
+        <!-- Leather Jacket -->
+        <a asp-controller="Shopping" asp-action="LeatherJacket" class="threft-product-item text-decoration-none">
+            <img src="https://assets.ajio.com/medias/sys_master/root/20231209/PYit/65737fc5afa4cf41f5c0d7a9/-473Wx593H-466868325-navy-MODEL5.jpg"
+                 alt="Leather Jacket"
+                 class="threft-product-image">
+            <h3 class="threft-product-name">Leather Jacket</h3>
+            <p class="threft-product-price">₹899</p>
+        </a>
+
+        <!-- Summer Dress -->
+        <a asp-controller="Shopping" asp-action="SummerDress" class="threft-product-item text-decoration-none">
+            <img src="https://images.meesho.com/images/products/379543377/81vcz_512.webp"
+                 alt="Summer Dress"
+                 class="threft-product-image">
+            <h3 class="threft-product-name">Summer Dress</h3>
+            <p class="threft-product-price">₹999</p>
+        </a>
+
+    </div>
+</section>

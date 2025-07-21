@@ -1,0 +1,130 @@
+﻿@{
+    ViewData["Title"] = "Payment Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    /* Red and Black Payment Page Theme */
+    body {
+        background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(40, 0, 0, 0.8)), url('https://thumbs.dreamstime.com/b/clothes-shop-8778849.jpg') center/cover no-repeat;
+        background-attachment: fixed;
+        color: #e0e0e0;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .payment-page-container {
+        max-width: 600px;
+        margin: 60px auto;
+        padding: 30px;
+        background: rgba(30, 30, 30, 0.7);
+        backdrop-filter: blur(10px);
+        border-radius: 15px;
+        box-shadow: 0 8px 16px rgba(209, 0, 0, 0.3);
+        border: 1px solid #333;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+        .payment-page-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(209, 0, 0, 0.4);
+        }
+
+    .payment-page-title {
+        text-align: center;
+        font-size: 30px;
+        font-weight: bold;
+        color: #ffffff;
+        text-shadow: 0 2px 4px rgba(209, 0, 0, 0.3);
+        margin-bottom: 25px;
+    }
+
+    .payment-form .form-label {
+        font-weight: 600;
+        color: #ffffff;
+    }
+
+    .payment-form .form-select {
+        border: 1px solid #d10000;
+        border-radius: 6px;
+        padding: 12px;
+        background-color: #1a1a1a;
+        color: #ffffff;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+        .payment-form .form-select:focus {
+            border-color: #ff0000;
+            box-shadow: 0 0 5px rgba(209, 0, 0, 0.4);
+            outline: none;
+        }
+
+    .btn-primary {
+        background: linear-gradient(135deg, #d10000, #b30000);
+        border: none;
+        color: white;
+        font-size: 18px;
+        font-weight: bold;
+        text-transform: uppercase;
+        padding: 12px;
+        border-radius: 6px;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 8px rgba(209, 0, 0, 0.3);
+    }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #ff0000, #d10000);
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(209, 0, 0, 0.4);
+        }
+
+    .alert-danger {
+        background-color: rgba(209, 0, 0, 0.2);
+        border-color: #d10000;
+        color: #ffffff;
+        border-radius: 6px;
+        text-align: center;
+        font-weight: bold;
+        padding: 12px;
+    }
+
+    @@media (max-width: 768px) {
+        .payment-page-container
+
+    {
+        padding: 20px;
+    }
+
+    .btn-primary {
+        font-size: 16px;
+        padding: 10px;
+    }
+
+    }
+</style>
+
+
+<!-- Payment Page Content -->
+<div class="payment-page-container">
+    <h2 class="payment-page-title">Select Payment Method</h2>
+
+    <form asp-action="ProcessPayment" method="post" class="payment-form">
+        <div class="mb-3">
+            <label class="form-label">Choose a Payment Method:</label>
+            <select class="form-select" name="paymentMethod" required>
+                <option value="">-- Select Payment Method --</option>
+                <option value="BankTransfer">Bank Transfer</option>
+                <option value="UPI">UPI</option>
+                <option value="CreditCard">Credit Card</option>
+                <option value="DebitCard">Debit Card</option>
+                <option value="NetBanking">Net Banking</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Pay Now</button>
+    </form>
+
+    <!-- Error Messages -->
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger mt-3">@TempData["ErrorMessage"]</div>
+    }
+</div>

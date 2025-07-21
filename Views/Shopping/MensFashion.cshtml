@@ -1,0 +1,147 @@
+﻿@{
+    ViewData["Title"] = "Men's Fashion";
+}<style>
+     /* Global Styles */
+     body {
+         background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(40, 0, 0, 0.85)), url('https://thumbs.dreamstime.com/b/clothes-shop-8778849.jpg') center/cover no-repeat;
+         background-attachment: fixed;
+         font-family: 'Poppins', sans-serif;
+         color: #fff;
+     }
+
+     /* Container */
+     .container {
+         margin-top: 60px;
+         margin-bottom: 60px;
+     }
+
+     /* Product Image Section */
+     .product-image {
+         width: 100%;
+         max-height: 500px;
+         object-fit: contain;
+         border: 2px solid #f1f1f1;
+         border-radius: 10px;
+     }
+
+     /* Product Info Section */
+     .product-info {
+         padding: 30px;
+         background: rgba(0, 0, 0, 0.7);
+         border-radius: 10px;
+         box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
+     }
+
+         .product-info h2 {
+             font-size: 36px;
+             font-weight: bold;
+             color: #ff4c4c;
+         }
+
+         .product-info h4 {
+             color: #ff4c4c;
+             font-weight: bold;
+             font-size: 28px;
+         }
+
+         .product-info p {
+             font-size: 16px;
+             color: #fff;
+             margin-bottom: 15px;
+         }
+
+     .list-group-item {
+         background-color: #222;
+         border: 1px solid #444;
+         color: #fff;
+     }
+
+         .list-group-item strong {
+             color: #ff4c4c;
+         }
+
+     /* Care Instructions Styling */
+     .care-instructions ul {
+         font-size: 14px;
+         line-height: 1.6;
+         color: #fff;
+     }
+
+     /* Back Button */
+     .btn-back {
+         background-color: #000;
+         color: #fff;
+         padding: 12px 20px;
+         text-align: center;
+         border-radius: 8px;
+         border: 2px solid #ff4c4c;
+     }
+
+         .btn-back:hover {
+             background-color: #ff4c4c;
+             color: #fff;
+             border-color: #ff4c4c;
+         }
+
+     /* Responsive Styling */
+     @@media (max-width: 768px) {
+         .product-info h2 {
+             font-size: 28px;
+         }
+
+         .product-info h4 {
+             font-size: 22px;
+         }
+
+         .product-info p {
+             font-size: 14px;
+         }
+
+         .btn-back {
+             font-size: 14px;
+             padding: 10px;
+         }
+     }
+</style>
+<div class="container mt-5 mb-5">
+    <div class="row">
+        <!-- Category Image -->
+        <div class="col-md-6">
+            <img src="https://louisphilippe.abfrl.in/blog/wp-content/uploads/2024/07/LP-Jean-cropped.jpeg"
+                 alt="Men's Fashion"
+                 class="img-fluid rounded shadow"
+                 style="height: 500px; object-fit: cover;" />
+        </div>
+
+        <!-- Description Content -->
+        <div class="col-md-6 d-flex flex-column justify-content-between">
+            <div>
+                <h2 class="mb-3">Men's Fashion</h2>
+                <p class="mb-4">
+                    Explore timeless, modern, and sophisticated styles for men. Whether you're looking for office wear, weekend outfits, or something special — we've got the latest trends covered.
+                </p>
+
+                <ul class="list-group list-group-flush mb-3">
+                    <li class="list-group-item"><strong>Includes:</strong> Shirts, Trousers, Jeans, Jackets, Suits</li>
+                    <li class="list-group-item"><strong>Styles:</strong> Casual, Formal, Athleisure, and Smart Casual</li>
+                    <li class="list-group-item"><strong>Sizes:</strong> XS to XXL</li>
+                    <li class="list-group-item"><strong>Colors:</strong> Classic neutrals, bold colors, and patterns</li>
+                </ul>
+
+                <div>
+                    <strong>Style Tips:</strong>
+                    <ul>
+                        <li>Pair tailored trousers with a crisp shirt for a formal look.</li>
+                        <li>For a casual weekend look, combine jeans with a trendy jacket.</li>
+                        <li>Accessorize with a stylish watch or belt for a complete ensemble.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Navy Blue Back Button -->
+            <div class="mt-4">
+                <a href="/" class="btn btn-back w-100">← Back to Home</a>
+            </div>
+        </div>
+    </div>
+</div>

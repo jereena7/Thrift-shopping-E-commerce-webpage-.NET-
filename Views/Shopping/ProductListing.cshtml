@@ -1,0 +1,240 @@
+﻿@model List<ThriftShop.Models.ProductModel>
+@{
+    ViewData["Title"] = "User Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    /* Red and Black User Dashboard Theme */
+    body {
+        background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(40, 0, 0, 0.8)), url('https://previews.123rf.com/images/annyart/annyart1504/annyart150400013/38562202-empty-showroom-3d-rendering.jpg') center/cover no-repeat;
+        background-attachment: fixed;
+        color: #e0e0e0;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .user-dashboard-container {
+        padding: 30px 0;
+    }
+
+    .user-dashboard-title {
+        color: #ffffff;
+        font-weight: 700;
+        margin-bottom: 30px;
+        text-align: center;
+        font-size: 32px;
+        text-shadow: 0 2px 4px rgba(209, 0, 0, 0.3);
+    }
+
+    .card {
+        border: none;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 8px 16px rgba(209, 0, 0, 0.2);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        background: rgba(30, 30, 30, 0.7);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        border: 1px solid #333;
+    }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(209, 0, 0, 0.4);
+            border-color: #d10000;
+        }
+
+    .card-img-top {
+        height: 250px;
+        object-fit: cover;
+        object-position: top;
+        width: 100%;
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+    }
+
+    .card-body {
+        padding: 20px;
+        text-align: center;
+    }
+
+    .card-title {
+        color: #ffffff;
+        font-weight: 700;
+        margin-bottom: 10px;
+        font-size: 20px;
+        text-transform: capitalize;
+    }
+
+    .card-text {
+        color: #b0b0b0;
+        margin-bottom: 8px;
+        font-size: 16px;
+    }
+
+        .card-text strong {
+            color: #ffffff;
+        }
+
+    /* Red Gradient Button */
+    .btn-card {
+        display: block;
+        width: 100%;
+        background: linear-gradient(135deg, #d10000, #b30000);
+        border: none;
+        color: white;
+        padding: 12px;
+        border-radius: 8px;
+        font-weight: 600;
+        text-transform: uppercase;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 8px rgba(209, 0, 0, 0.3);
+    }
+
+        .btn-card:hover {
+            background: linear-gradient(135deg, #ff0000, #d10000);
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(209, 0, 0, 0.4);
+        }
+
+    /* Form Elements */
+    .form-control, .form-select {
+        border-radius: 6px;
+        padding: 10px 15px;
+        background-color: #1a1a1a;
+        border: 1px solid #333;
+        color: #ffffff;
+    }
+
+        .form-control:focus, .form-select:focus {
+            border-color: #d10000;
+            box-shadow: 0 0 0 0.25rem rgba(209, 0, 0, 0.25);
+            outline: none;
+        }
+
+    .btn-primary {
+        background: linear-gradient(135deg, #d10000, #b30000);
+        border: none;
+        padding: 10px 20px;
+        font-weight: 600;
+        border-radius: 6px;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 8px rgba(209, 0, 0, 0.3);
+    }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #ff0000, #d10000);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(209, 0, 0, 0.4);
+        }
+
+    .alert-danger {
+        background-color: rgba(209, 0, 0, 0.2);
+        border-color: #d10000;
+        color: #ffffff;
+        border-radius: 6px;
+    }
+
+    a.text-decoration-none {
+        color: inherit;
+    }
+
+        a.text-decoration-none:hover {
+            text-decoration: none;
+        }
+
+    /* Responsive Design */
+    @@media (max-width: 768px) {
+        .user-dashboard-title {
+            font-size: 24px;
+        }
+
+        .card {
+            margin-bottom: 20px;
+        }
+    }
+</style>
+
+<div class="user-dashboard-container">
+    <div class="container">
+        <h2 class="user-dashboard-title">Welcome Explore Latest Fashion</h2>
+
+        <!-- Search and Filter Options -->
+        <form method="get" class="mb-4">
+            <div class="row">
+                <!-- Search Bar -->
+                <div class="col-md-4 mb-3">
+                    <input type="text" class="form-control" name="searchTerm" placeholder="Search by product name" value="@ViewBag.SearchTerm">
+                </div>
+
+                <!-- Sort By -->
+                <div class="col-md-3 mb-3">
+                    <select class="form-select" name="sortBy">
+                        <option value="">Sort By</option>
+                        <option value="PriceLowToHigh" selected="@(ViewBag.SortBy == "PriceLowToHigh")">Price: Low to High</option>
+                        <option value="PriceHighToLow" selected="@(ViewBag.SortBy == "PriceHighToLow")">Price: High to Low</option>
+                    </select>
+                </div>
+
+                <!-- Size Filter -->
+                <div class="col-md-3 mb-3">
+                    <select class="form-select" name="sizeFilter">
+                        <option value="">Filter by Size</option>
+                        <option value="XS" selected="@(ViewBag.SizeFilter == "XS")">XS</option>
+                        <option value="S" selected="@(ViewBag.SizeFilter == "S")">S</option>
+                        <option value="M" selected="@(ViewBag.SizeFilter == "M")">M</option>
+                        <option value="L" selected="@(ViewBag.SizeFilter == "L")">L</option>
+                        <option value="XL" selected="@(ViewBag.SizeFilter == "XL")">XL</option>
+                        <option value="XXL" selected="@(ViewBag.SizeFilter == "XXL")">XXL</option>
+                    </select>
+                </div>
+
+                <!-- Condition Filter -->
+                <div class="col-md-2 mb-3">
+                    <select class="form-select" name="conditionFilter">
+                        <option value="">Filter by Condition</option>
+                        <option value="New" selected="@(ViewBag.ConditionFilter == "New")">New</option>
+                        <option value="Used" selected="@(ViewBag.ConditionFilter == "Used")">Used</option>
+                    </select>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Apply Filters</button>
+        </form>
+
+        <!-- Display Products -->
+        @if (ViewBag.ErrorMessage != null)
+        {
+            <div class="alert alert-danger">@ViewBag.ErrorMessage</div>
+        }
+
+        <div class="row">
+            @foreach (var product in Model)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <a asp-action="ProductDetails" asp-route-id="@product.ProductId" class="text-decoration-none">
+                            <div class="card-img-top">
+                                @if (!string.IsNullOrEmpty(product.ImagePaths))
+                                {
+                                    var firstImagePath = product.ImagePaths.Split(',')[0];
+                                    <img src="@firstImagePath" class="card-img-top" alt="@product.ProductName" />
+                                }
+                                else
+                                {
+                                    <img src="/images/no-image.png" class="card-img-top" alt="No Image Available" />
+                                }
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">@product.ProductName</h5>
+                                <p class="card-text"><strong>Price:</strong> INR @product.Price</p>
+                                <p class="card-text"><strong>Size:</strong> @product.Size</p>
+                                <p class="card-text"><strong>Condition:</strong> @product.Conditions</p>
+                                <button class="btn-card">View Details</button>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

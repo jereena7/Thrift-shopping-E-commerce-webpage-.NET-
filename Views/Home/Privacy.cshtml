@@ -1,0 +1,26 @@
+﻿@model List<ThriftShop.Models.ProductModel>
+@{
+    ViewData["Title"] = "Product Listing";
+}
+
+<div class="product-listing-container">
+    <h2 class="product-listing-title">Our Products</h2>
+
+    <div class="row">
+        @foreach (var product in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="@product.ImagePaths.Split(',')[0]" class="card-img-top" alt="@product.ProductName" />
+                    <div class="card-body">
+                        <h5 class="card-title">@product.ProductName</h5>
+                        <p class="card-text">@product.ProductDescription</p>
+                        <p class="card-text"><strong>Price:</strong> INR @product.Price</p>
+                        <p class="card-text"><strong>Stock:</strong> @product.StockStatus</p>
+                        <p class="card-text"><strong>Sizes:</strong> @product.Size</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

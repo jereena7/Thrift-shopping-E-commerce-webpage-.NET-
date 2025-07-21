@@ -1,0 +1,141 @@
+﻿@model IEnumerable<ThriftShop.Models.User>
+@{
+    ViewData["Title"] = "Manage Users";
+}
+
+<h2 class="user-page-title">Manage Users</h2>
+
+<table class="table table-striped user-page-container">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Username</th>
+            <th>Role</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.UserId</td>
+                <td>@user.FirstName @user.LastName</td>
+                <td>@user.Username</td>
+                <td>@user.UserRole</td>
+                <td>
+                    <a class="btn btn-edit btn-sm" asp-action="EditUser" asp-route-id="@user.UserId">Edit</a>
+                    <a class="btn btn-delete btn-sm" asp-action="DeleteUser" asp-route-id="@user.UserId" onclick="return confirm('Are you sure you want to delete this user?');">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<style>
+    body {
+        background: linear-gradient(to bottom right, #0d0d0d, #1a1a1a);
+        color: white;
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    .user-page-container {
+        max-width: 900px;
+        margin: 60px auto;
+        padding: 25px;
+        background: rgba(30, 30, 30, 0.85);
+        backdrop-filter: blur(10px);
+        border-radius: 15px;
+        box-shadow: 0 8px 16px rgba(255, 0, 0, 0.2);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        color: white;
+    }
+
+        .user-page-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(255, 0, 0, 0.3);
+        }
+
+    .user-page-title {
+        text-align: center;
+        font-size: 30px;
+        font-weight: bold;
+        color: #ff4d4d;
+        margin-bottom: 25px;
+    }
+
+    .table {
+        background-color: transparent;
+        color: white;
+    }
+
+        .table th {
+            background-color: #990000;
+            color: white;
+            border: none;
+        }
+
+        .table td {
+            color: white;
+            border-color: #444;
+        }
+
+    .table-striped tbody tr:nth-child(even) {
+        background-color: rgba(255, 0, 0, 0.05);
+    }
+
+    .table tbody tr:hover {
+        background-color: rgba(255, 0, 0, 0.1);
+    }
+
+    .btn {
+        padding: 8px 14px;
+        border-radius: 6px;
+        font-weight: bold;
+        text-transform: uppercase;
+        font-size: 14px;
+        border: none;
+        color: white;
+    }
+
+    .btn-edit {
+        background: linear-gradient(135deg, #ff6666, #cc0000);
+    }
+
+        .btn-edit:hover {
+            background: linear-gradient(135deg, #cc0000, #ff6666);
+            transform: scale(1.05);
+        }
+
+    .btn-delete {
+        background: linear-gradient(135deg, #990000, #660000);
+    }
+
+        .btn-delete:hover {
+            background: linear-gradient(135deg, #660000, #990000);
+            transform: scale(1.05);
+        }
+
+    @@media (max-width: 768px) {
+        .user-page-container
+
+    {
+        padding: 20px;
+    }
+
+    .table th, .table td {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .btn {
+        font-size: 13px;
+        padding: 6px 12px;
+    }
+
+    .user-page-title {
+        font-size: 24px;
+    }
+
+    }
+</style>

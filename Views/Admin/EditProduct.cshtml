@@ -1,0 +1,185 @@
+﻿@model ThriftShop.Models.ProductModel
+@{
+    ViewData["Title"] = "Edit Product";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<style>
+    body {
+        background: linear-gradient(to bottom right, #0d0d0d, #1a1a1a);
+        background-attachment: fixed;
+        color: white;
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    .edit-product-container {
+        max-width: 700px;
+        margin: 60px auto;
+        padding: 30px;
+        background: rgba(30, 30, 30, 0.9);
+        backdrop-filter: blur(12px);
+        border-radius: 15px;
+        box-shadow: 0 8px 16px rgba(255, 0, 0, 0.2);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+        .edit-product-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(255, 0, 0, 0.3);
+        }
+
+    .edit-product-title {
+        font-size: 28px;
+        font-weight: bold;
+        color: #ff4d4d;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .form-label {
+        font-weight: bold;
+        color: white;
+    }
+
+    .form-control,
+    .form-select {
+        background-color: rgba(255, 255, 255, 0.05);
+        color: white;
+        border: 2px solid #ff4d4d;
+        border-radius: 8px;
+        padding: 10px;
+        font-size: 16px;
+        transition: border 0.3s ease, box-shadow 0.3s ease;
+    }
+
+        .form-control:focus,
+        .form-select:focus {
+            border-color: #ff1a1a;
+            outline: none;
+            box-shadow: 0 0 6px rgba(255, 26, 26, 0.5);
+            background-color: rgba(255, 255, 255, 0.08);
+        }
+
+    .btn-primary {
+        background: linear-gradient(135deg, #ff4d4d, #990000);
+        border: none;
+        color: white;
+        font-weight: bold;
+        text-transform: uppercase;
+        padding: 12px;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        width: 100%;
+        margin-top: 15px;
+    }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #cc0000, #ff1a1a);
+            transform: scale(1.05);
+        }
+
+    .alert {
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .alert-success {
+        background-color: rgba(0, 128, 0, 0.8);
+        color: white;
+        border: none;
+    }
+
+    .alert-danger {
+        background-color: rgba(204, 0, 0, 0.8);
+        color: white;
+        border: none;
+    }
+
+    @@media (max-width: 768px) {
+        .edit-product-container
+
+    {
+        padding: 20px;
+    }
+
+    .form-control,
+    .form-select {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .btn-primary {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    }
+</style>
+
+<!-- Edit Product Form -->
+<div class="edit-product-container">
+    <h2 class="edit-product-title">✏️ Edit Product</h2>
+
+    <form class="edit-product-form" method="post" enctype="multipart/form-data" asp-action="EditProduct" asp-controller="Admin">
+        <input type="hidden" asp-for="ProductId" />
+
+        <div class="mb-3">
+            <label for="ProductName" class="form-label">📌 Product Name</label>
+            <input type="text" class="form-control" id="ProductName" name="ProductName" value="@Model.ProductName" required />
+        </div>
+
+        <div class="mb-3">
+            <label for="ProductDescription" class="form-label">📝 Product Description</label>
+            <textarea class="form-control" id="ProductDescription" name="ProductDescription" rows="3">@Model.ProductDescription</textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="Price" class="form-label">💰 Price (INR)</label>
+            <input type="number" step="0.01" class="form-control" id="Price" name="Price" value="@Model.Price" required />
+        </div>
+
+        <div class="mb-3">
+            <label for="StockStatus" class="form-label">📦 Stock Status</label>
+            <select class="form-select" id="StockStatus" name="StockStatus" required>
+                <option value="InStock" selected="@(Model.StockStatus == "InStock")">✅ In Stock</option>
+                <option value="OutOfStock" selected="@(Model.StockStatus == "OutOfStock")">❌ Out of Stock</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="Size" class="form-label">📏 Size</label>
+            <input type="text" class="form-control" id="Size" name="Size" value="@Model.Size" placeholder="XS,S,M,L,XL,XXL" required />
+        </div>
+
+        <div class="mb-3">
+            <label for="Quantity" class="form-label">🔢 Quantity</label>
+            <input type="number" class="form-control" id="Quantity" name="Quantity" value="@Model.Quantity" required />
+        </div>
+
+        <div class="mb-3">
+            <label for="ProductHeading" class="form-label">📢 Product Heading</label>
+            <input type="text" class="form-control" id="ProductHeading" name="ProductHeading" value="@Model.ProductHeading" required />
+        </div>
+
+        <div class="mb-3">
+            <label for="Conditions" class="form-label">📜 Conditions</label>
+            <textarea class="form-control" id="Conditions" name="Conditions" rows="3">@Model.Conditions</textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="Images" class="form-label">📷 Upload New Images</label>
+            <input type="file" class="form-control" id="Images" name="images" multiple />
+        </div>
+
+        <button type="submit" class="btn btn-primary">💾 Update Product</button>
+    </form>
+
+    @if (ViewBag.SuccessMessage != null)
+    {
+        <div class="alert alert-success mt-3">✅ @ViewBag.SuccessMessage</div>
+    }
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <div class="alert alert-danger mt-3">❌ @ViewBag.ErrorMessage</div>
+    }
+</div>

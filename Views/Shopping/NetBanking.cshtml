@@ -1,0 +1,131 @@
+﻿@{
+    ViewBag.Title = "Net Banking";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    body {
+        background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(40, 0, 0, 0.8)), url('https://thumbs.dreamstime.com/b/clothes-shop-8778849.jpg') center/cover no-repeat;
+        background-attachment: fixed;
+        color: #e0e0e0;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .buying-page-container {
+        max-width: 600px;
+        margin: 60px auto;
+        padding: 30px;
+        background: rgba(30, 30, 30, 0.7);
+        backdrop-filter: blur(10px);
+        border-radius: 15px;
+        box-shadow: 0 8px 16px rgba(209, 0, 0, 0.3);
+        border: 1px solid #333;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+        .buying-page-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(209, 0, 0, 0.4);
+        }
+
+    .buying-page-title {
+        text-align: center;
+        font-size: 30px;
+        font-weight: bold;
+        color: #ffffff;
+        text-shadow: 0 2px 4px rgba(209, 0, 0, 0.3);
+        margin-bottom: 25px;
+    }
+
+    .buying-form .form-label {
+        font-weight: 600;
+        color: #ffffff;
+    }
+
+    .buying-form .form-control,
+    .form-select {
+        border: 1px solid #d10000;
+        border-radius: 6px;
+        padding: 12px;
+        background-color: #1a1a1a;
+        color: #ffffff;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+        .buying-form .form-control:focus,
+        .form-select:focus {
+            border-color: #ff0000;
+            box-shadow: 0 0 5px rgba(209, 0, 0, 0.4);
+            outline: none;
+        }
+
+    .btn-primary {
+        background: linear-gradient(135deg, #d10000, #b30000);
+        border: none;
+        color: white;
+        font-size: 18px;
+        font-weight: bold;
+        text-transform: uppercase;
+        padding: 12px;
+        border-radius: 6px;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 8px rgba(209, 0, 0, 0.3);
+    }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #ff0000, #d10000);
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(209, 0, 0, 0.4);
+        }
+
+    @@media (max-width: 768px) {
+        .buying-page-container
+
+    {
+        padding: 20px;
+    }
+
+    .btn-primary {
+        font-size: 16px;
+        padding: 10px;
+    }
+
+    }
+</style>
+
+
+<div class="buying-page-container">
+    <h2 class="buying-page-title">Net Banking</h2>
+
+    <form asp-action="ConfirmPayment" method="post" class="buying-form">
+        <input type="hidden" name="method" value="NetBanking" />
+
+        <div class="mb-3">
+            <label class="form-label">Select Bank</label>
+            <select name="bankName" class="form-select" required>
+                <option value="">-- Select Bank --</option>
+                <option value="HDFC">HDFC</option>
+                <option value="ICICI">ICICI</option>
+                <option value="SBI">SBI</option>
+                <option value="Axis">Axis Bank</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">User ID</label>
+            <input type="text" name="netBankUser" class="form-control"
+                   required pattern="^[a-zA-Z0-9]{5,20}$"
+                   title="User ID should be alphanumeric and 5-20 characters long" />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Password</label>
+            <input type="password" name="netBankPass" class="form-control"
+                   required minlength="6" maxlength="20"
+                   title="Password must be 6-20 characters" />
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100">Submit Payment</button>
+    </form>
+
+</div>

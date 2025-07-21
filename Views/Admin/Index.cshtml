@@ -1,0 +1,117 @@
+﻿@{
+    ViewData["Title"] = "Admin Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    /* Red and Black Background */
+    body {
+        background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(40, 0, 0, 0.8)), url('https://previews.123rf.com/images/annyart/annyart1504/annyart150400013/38562202-empty-showroom-3d-rendering.jpg') center/cover no-repeat;
+        background-attachment: fixed;
+        color: #e0e0e0;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    /* Admin Dashboard Container - Red Accents */
+    .admin-dashboard {
+        max-width: 800px;
+        margin: 60px auto;
+        padding: 30px;
+        background: rgba(20, 20, 20, 0.9);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-radius: 15px;
+        border: 1px solid #d10000;
+        box-shadow: 0 10px 30px rgba(209, 0, 0, 0.3);
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+        .admin-dashboard:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 45px rgba(209, 0, 0, 0.4);
+        }
+
+        .admin-dashboard h2 {
+            font-size: 28px;
+            font-weight: bold;
+            color: #ffffff;
+            margin-bottom: 15px;
+            text-shadow: 0 2px 4px rgba(209, 0, 0, 0.3);
+        }
+
+        .admin-dashboard p {
+            font-size: 18px;
+            color: #b0b0b0;
+            margin-bottom: 15px;
+        }
+
+    /* Admin Dashboard Buttons */
+    .admin-btn {
+        display: inline-block;
+        width: 100%;
+        max-width: 250px;
+        padding: 14px;
+        margin: 10px;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: bold;
+        text-transform: uppercase;
+        text-decoration: none;
+        text-align: center;
+        color: white;
+        transition: all 0.3s ease;
+        border: none;
+        cursor: pointer;
+    }
+
+    .btn-primary {
+        background: linear-gradient(135deg, #d10000, #b30000);
+        box-shadow: 0 4px 12px rgba(209, 0, 0, 0.3);
+    }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #ff0000, #d10000);
+            transform: scale(1.05);
+            box-shadow: 0 6px 16px rgba(209, 0, 0, 0.4);
+        }
+
+    .btn-danger {
+        background: linear-gradient(135deg, #333333, #1a1a1a);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+        .btn-danger:hover {
+            background: linear-gradient(135deg, #1a1a1a, #333333);
+            transform: scale(1.05);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+        }
+
+    /* Responsive Design */
+    @@media (max-width: 768px) {
+        .admin-dashboard {
+            padding: 20px;
+            margin: 40px 20px;
+        }
+
+        .admin-btn {
+            width: 100%;
+            max-width: none;
+            margin: 8px 0;
+        }
+    }
+</style>
+
+<!-- Admin Dashboard Content -->
+<div class="admin-dashboard">
+    <h2>Admin Dashboard 🛠️</h2>
+    <p>Welcome to the admin panel.</p>
+    <p>From here, you can manage users, products, and other administrative tasks.</p>
+
+    <!-- Admin Management Buttons -->
+    <a asp-action="ManageUsers" class="admin-btn btn-primary">Manage Users</a>
+    <a asp-action="ManageProducts" class="admin-btn btn-primary">Manage Products</a>
+    <a asp-controller="Shopping" asp-action="AdminViewPurchases" class="admin-btn btn-primary">🛒 View Orders</a>
+    
+    <a asp-controller="Account" asp-action="Logout" class="admin-btn btn-danger">Logout</a>
+</div>
